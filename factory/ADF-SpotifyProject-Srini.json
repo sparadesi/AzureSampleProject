@@ -1,0 +1,9 @@
+{
+	"name": "ADF-SpotifyProject-Srini",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "edb5ccf7-e012-4e88-be26-a75ba83cd89c",
+		"tenantId": "57572a41-22df-4217-8a41-46d0af3f36ad"
+	}
+}
