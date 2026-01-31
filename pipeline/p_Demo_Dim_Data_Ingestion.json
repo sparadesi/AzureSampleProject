@@ -5,7 +5,22 @@
 			{
 				"name": "cpy_AzureSQL_DIM_ADLS",
 				"type": "Copy",
-				"dependsOn": [],
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "lkp_Last_Max_Date",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "sv_current_timestamp",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -17,15 +32,49 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "SELECT\n *\nFROM @{pipeline().parameters.schema}.@{pipeline().parameters.table}\nWHERE\n @{pipeline().parameters.max_date} > '@{activity('lkp_Last_Max_Date').output.value[0].cdc}'",
+							"type": "Expression"
+						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
-						"referenceName": "Azure_SQL_DIM_Table",
+						"referenceName": "DS_SQLDB_DIM_Tables",
 						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "parquet_dynamci",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": "bronze",
+							"folder": {
+								"value": "@pipeline().parameters.table",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			},
@@ -61,6 +110,24 @@
 							"folder": "cdc",
 							"file": "cdc.json"
 						}
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "sv_current_timestamp",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "curr",
+					"value": {
+						"value": "@utcNow()",
+						"type": "Expression"
 					}
 				}
 			}
@@ -74,6 +141,11 @@
 			},
 			"max_date": {
 				"type": "string"
+			}
+		},
+		"variables": {
+			"curr": {
+				"type": "String"
 			}
 		},
 		"annotations": []
