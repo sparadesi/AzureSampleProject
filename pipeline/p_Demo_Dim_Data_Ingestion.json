@@ -73,6 +73,10 @@
 							"folder": {
 								"value": "@pipeline().parameters.table",
 								"type": "Expression"
+							},
+							"file": {
+								"value": "@concat(pipeline().parameters.table,'-',variables('curr'))",
+								"type": "Expression"
 							}
 						}
 					}
