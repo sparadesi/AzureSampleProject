@@ -174,7 +174,7 @@
 											"type": "Expression"
 										},
 										"file": {
-											"value": "@contains(pipeline().parameters.table,'-',variables('curr') )",
+											"value": "@concat(pipeline().parameters.table,'-',variables('curr') )",
 											"type": "Expression"
 										}
 									}
