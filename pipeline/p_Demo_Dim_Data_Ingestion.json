@@ -5,8 +5,6 @@
 			{
 				"name": "cpy_AzureSQL_DIM_ADLS",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "lkp_Last_Max_Date",
@@ -85,8 +83,6 @@
 			{
 				"name": "lkp_Last_Max_Date",
 				"type": "Lookup",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -123,8 +119,6 @@
 			{
 				"name": "sv_current_timestamp",
 				"type": "SetVariable",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"secureOutput": false,
@@ -167,7 +161,7 @@
 						{
 							"type": "Query",
 							"text": {
-								"value": "SELECT MAX(updated_at) from dbo.DimUser",
+								"value": "SELECT\n MAX(@{pipeline().parameters.max_date}) as cdc\nFROM @{pipeline().parameters.schema}.@{pipeline().parameters.table}",
 								"type": "Expression"
 							}
 						}
@@ -203,7 +197,7 @@
 							{
 								"name": "curr",
 								"value": {
-									"value": "@activity('scrpt_Pick_MAX_cdc_date').output",
+									"value": "@activity('scrpt_Pick_MAX_cdc_date').output.resultSets[0].rows[0].cdc",
 									"type": "Expression"
 								}
 							}
