@@ -170,7 +170,7 @@
 									"parameters": {
 										"container": "bronze",
 										"folder": {
-											"value": "@pipeline().parameters.table",
+											"value": "DimUser",
 											"type": "Expression"
 										},
 										"file": {
