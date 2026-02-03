@@ -179,6 +179,13 @@
 										}
 									}
 								},
+								"logStorageSettings": {
+									"linkedServiceName": {
+										"referenceName": "LS_AzureDataLake",
+										"type": "LinkedServiceReference"
+									},
+									"path": "bronze/"
+								},
 								"enableLogging": true,
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
