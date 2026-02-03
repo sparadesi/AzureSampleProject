@@ -312,6 +312,9 @@
 			},
 			"max_date": {
 				"type": "string"
+			},
+			"initial_Load_date": {
+				"type": "string"
 			}
 		},
 		"variables": {
