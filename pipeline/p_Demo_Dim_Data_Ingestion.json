@@ -167,7 +167,7 @@
 						{
 							"type": "Query",
 							"text": {
-								"value": "SELECT\n MAX(@{pipeline().parameters.max_date})\nFROM @{pipeline().parameters.schema}.@{pipeline().parameters.table}",
+								"value": "SELECT MAX(updated_at) from dbo.DimUser",
 								"type": "Expression"
 							}
 						}
