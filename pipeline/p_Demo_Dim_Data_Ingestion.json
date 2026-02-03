@@ -184,7 +184,7 @@
 										"referenceName": "LS_AzureDataLake",
 										"type": "LinkedServiceReference"
 									},
-									"path": "bronze/DimUser"
+									"path": "bronze/DimUser/"
 								},
 								"enableLogging": true,
 								"storeSettings": {
