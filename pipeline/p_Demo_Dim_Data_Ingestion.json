@@ -147,54 +147,9 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@greater(activity('cpy_cdc_MAX_to_file').output.dataRead,0 )",
+						"value": "@greater(activity('cpy_AzureSQL_DIM_ADLS').output.dataRead,0 )",
 						"type": "Expression"
 					},
-					"ifFalseActivities": [
-						{
-							"name": "del_empty_file",
-							"type": "Delete",
-							"dependsOn": [],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"dataset": {
-									"referenceName": "parquet_dynamci",
-									"type": "DatasetReference",
-									"parameters": {
-										"container": "bronze",
-										"folder": {
-											"value": "DimUser",
-											"type": "Expression"
-										},
-										"file": {
-											"value": "@concat(pipeline().parameters.table,'-',variables('curr'))",
-											"type": "Expression"
-										}
-									}
-								},
-								"logStorageSettings": {
-									"linkedServiceName": {
-										"referenceName": "LS_AzureDataLake",
-										"type": "LinkedServiceReference"
-									},
-									"path": "bronze/DimUser/"
-								},
-								"enableLogging": true,
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"enablePartitionDiscovery": false
-								}
-							}
-						}
-					],
 					"ifTrueActivities": [
 						{
 							"name": "scrpt_Pick_MAX_cdc_date",
