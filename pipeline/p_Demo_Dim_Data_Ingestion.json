@@ -249,7 +249,7 @@
 									"type": "JsonSource",
 									"additionalColumns": [
 										{
-											"name": "curr",
+											"name": "cdc",
 											"value": {
 												"value": "@activity('scrpt_Pick_MAX_cdc_date').output.resultSets[0].rows[0].cdc",
 												"type": "Expression"
