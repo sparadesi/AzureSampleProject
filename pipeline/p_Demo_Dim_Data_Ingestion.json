@@ -111,7 +111,7 @@
 							"container": "bronze",
 							"folder": "cdc",
 							"file": {
-								"value": "@concat(pipeline().parameters.table,'cdc_.json')",
+								"value": "@concat(pipeline().parameters.table,'_cdc.json')",
 								"type": "Expression"
 							}
 						}
