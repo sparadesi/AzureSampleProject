@@ -110,7 +110,10 @@
 						"parameters": {
 							"container": "bronze",
 							"folder": "cdc",
-							"file": "cdc.json"
+							"file": {
+								"value": "@concat(pipeline().parameters.table,'cdc_.json')",
+								"type": "Expression"
+							}
 						}
 					},
 					"firstRowOnly": false
