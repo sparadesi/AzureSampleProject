@@ -5,9 +5,20 @@
 			{
 				"name": "ForEach1",
 				"type": "ForEach",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "lkp_cntrl_table",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
+					"items": {
+						"value": "@activity('lkp_cntrl_table').output.value",
+						"type": "Expression"
+					},
 					"activities": [
 						{
 							"name": "cpy_AzureSQL_DIM_ADLS",
@@ -317,22 +328,34 @@
 						}
 					]
 				}
+			},
+			{
+				"name": "lkp_cntrl_table",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT SCHEMA_NAME, TABLE_NAME, CDC_COLUMN FROM [dbo].[Dim_Control_table]",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "DS_SQLDB_DIM_Tables",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
 			}
 		],
-		"parameters": {
-			"schema": {
-				"type": "string"
-			},
-			"table": {
-				"type": "string"
-			},
-			"max_date": {
-				"type": "string"
-			},
-			"initial_Load_date": {
-				"type": "string"
-			}
-		},
 		"variables": {
 			"curr": {
 				"type": "String"
