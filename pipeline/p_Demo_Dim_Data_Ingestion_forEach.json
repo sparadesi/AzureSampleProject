@@ -87,11 +87,11 @@
 									"parameters": {
 										"container": "bronze",
 										"folder": {
-											"value": "@pipeline().parameters.table",
+											"value": "@item().TABLE_NAME",
 											"type": "Expression"
 										},
 										"file": {
-											"value": "@concat(pipeline().parameters.table,'-',variables('curr'))",
+											"value": "@concat(item().TABLE_NAME,'-',variables('curr'))",
 											"type": "Expression"
 										}
 									}
@@ -191,11 +191,11 @@
 												"parameters": {
 													"container": "bronze",
 													"folder": {
-														"value": "@pipeline().parameters.table",
+														"value": "@item().TABLE_NAME",
 														"type": "Expression"
 													},
 													"file": {
-														"value": "@concat(pipeline().parameters.table,'-',variables('curr') )",
+														"value": "@concat(item().TABLE_NAME,'-',variables('curr'))",
 														"type": "Expression"
 													}
 												}
@@ -344,7 +344,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT SCHEMA_NAME, TABLE_NAME, CDC_COLUMN FROM [dbo].[Dim_Control_table]",
+						"sqlReaderQuery": "SELECT SCHEMA_NAME, TABLE_NAME, CDC_COLUMN, INITIAL_LOAD_DATE FROM [dbo].[Dim_Control_table]",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
