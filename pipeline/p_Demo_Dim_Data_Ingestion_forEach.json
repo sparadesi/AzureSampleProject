@@ -49,7 +49,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "SELECT\n *\nFROM @{pipeline().parameters.schema}.@{pipeline().parameters.table}\nWHERE\n @{pipeline().parameters.max_date} > '@{if(empty(pipeline().parameters.initial_Load_date),activity('lkp_Last_Max_Date').output.value[0].cdc , pipeline().parameters.initial_Load_date)}'\n\n\n ",
+										"value": "SELECT\n *\nFROM @{item().SCHEMA_NAME}.@{item().TABLE_NAME}\nWHERE\n @{item().CDC_COLUMN} > '@{if(empty(item().INITIAL_LOAD_DATE),activity('lkp_Last_Max_Date').output.value[0].cdc , item().INITIAL_LOAD_DATE)}'\n\n\n ",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
@@ -129,7 +129,7 @@
 										"container": "bronze",
 										"folder": "cdc",
 										"file": {
-											"value": "@concat(pipeline().parameters.table,'_cdc.json')",
+											"value": "@concat(item().TABLE_NAME,'_cdc.json')",
 											"type": "Expression"
 										}
 									}
@@ -238,7 +238,7 @@
 												{
 													"type": "Query",
 													"text": {
-														"value": "SELECT\n MAX(@{pipeline().parameters.max_date}) as cdc\nFROM @{pipeline().parameters.schema}.@{pipeline().parameters.table}",
+														"value": "SELECT\n MAX(@{item().CDC_COLUMN}) as cdc\nFROM @{item().SCHEMA_NAME}.@{item().TABLE_NAME}",
 														"type": "Expression"
 													}
 												}
@@ -316,7 +316,7 @@
 													"container": "bronze",
 													"folder": "cdc",
 													"file": {
-														"value": "@concat(pipeline().parameters.table,'_cdc.json')",
+														"value": "@concat(item().TABLE_NAME,'_cdc.json')",
 														"type": "Expression"
 													}
 												}
