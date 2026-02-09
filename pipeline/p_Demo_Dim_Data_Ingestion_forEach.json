@@ -5,6 +5,8 @@
 			{
 				"name": "ForEach1",
 				"type": "ForEach",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "lkp_cntrl_table",
@@ -349,7 +351,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "DS_SQLDB_DIM_Tables",
+						"referenceName": "Azure_SQL_DIM_Table",
 						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
