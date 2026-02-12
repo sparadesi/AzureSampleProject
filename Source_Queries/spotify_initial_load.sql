@@ -2926,3 +2926,18 @@ INSERT INTO FactStream (stream_id, user_id, track_id, date_key, listen_duration,
 INSERT INTO FactStream (stream_id, user_id, track_id, date_key, listen_duration, device_type, stream_timestamp) VALUES (999, 379, 81, 20250221, 66, 'Desktop', '2025-10-05 19:49:56');
 INSERT INTO FactStream (stream_id, user_id, track_id, date_key, listen_duration, device_type, stream_timestamp) VALUES (1000, 379, 42, 20241114, 15, 'Desktop', '2025-09-29 19:49:56');
 
+
+create table Dim_Control_table
+(
+ SCHEMA_NAME varchar(20),
+ TABLE_NAME varchar(20), 
+ CDC_COLUMN varchar(20), 
+ INITIAL_LOAD_DATE varchar(20)
+)
+
+SELECT SCHEMA_NAME, TABLE_NAME, CDC_COLUMN, INITIAL_LOAD_DATE FROM [dbo].[Dim_Control_table];
+--insert into [dbo].[Dim_Control_table] (SCHEMA_NAME, TABLE_NAME, CDC_COLUMN) values ('dbo','DimArtist','updated_at');
+--insert into [dbo].[Dim_Control_table] (SCHEMA_NAME, TABLE_NAME, CDC_COLUMN) values ('dbo','DimDate','date');
+--insert into [dbo].[Dim_Control_table] (SCHEMA_NAME, TABLE_NAME, CDC_COLUMN) values ('dbo','DimTrack','updated_at');
+--insert into [dbo].[Dim_Control_table] (SCHEMA_NAME, TABLE_NAME, CDC_COLUMN) values ('dbo','DimUser','updated_at');
+--insert into [dbo].[Dim_Control_table] (SCHEMA_NAME, TABLE_NAME, CDC_COLUMN) values ('dbo','FactStream','stream_timestamp');
