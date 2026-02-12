@@ -231,10 +231,6 @@
 											"secureInput": false
 										},
 										"userProperties": [],
-										"linkedServiceName": {
-											"referenceName": "LS_AzureSQL_Srini_DB",
-											"type": "LinkedServiceReference"
-										},
 										"typeProperties": {
 											"scripts": [
 												{

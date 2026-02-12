@@ -2,7 +2,7 @@
 	"name": "Azure_SQL_DIM_Table",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "LS_AzureSQL_Database",
+			"referenceName": "LS_AzureSQLDBSrini",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
