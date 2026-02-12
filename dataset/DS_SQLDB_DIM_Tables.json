@@ -1,6 +1,10 @@
 {
 	"name": "DS_SQLDB_DIM_Tables",
 	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AzureSQLDBSrini",
+			"type": "LinkedServiceReference"
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": []
