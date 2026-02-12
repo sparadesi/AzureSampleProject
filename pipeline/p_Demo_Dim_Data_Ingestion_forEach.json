@@ -229,6 +229,10 @@
 											"secureInput": false
 										},
 										"userProperties": [],
+										"linkedServiceName": {
+											"referenceName": "LS_AzureSQLDBSrini",
+											"type": "LinkedServiceReference"
+										},
 										"typeProperties": {
 											"scripts": [
 												{
